@@ -1,0 +1,229 @@
+You are an expert in Blender and Python. Next you will see some encapsulated Blender Python functions. Given a user prompt, you are asked to use these functions to construct a physical scene in Blender that matches the user prompt and renders the result.
+
+-----------------------Functions------------------------------
+These are some of the Python functions that work in Blender. Note the docstring of the functions to understand what they do.
+
+def create_floor(elasticity=1)
+    """
+    Creates a floor plane in Blender, scales it, and sets it up with collision and rigid body physics.
+    The created floor is scaled to be large enough to act as a ground plane for most scenes.
+
+    Do not create floors when the physical scene does not involve floors.
+
+    Parameters:
+    - elasticity (float): The restitution or 'bounciness' of the floor. A value of 1 means perfectly elastic, 
+                          while 0 means no elasticity. Default is 1.
+    """
+
+def create_object_in_assets(file_path, new_name, position=(0, 0, 5), max_dimension=None)
+    """
+    Imports a 3D model from a specified file, resizes it proportionally if a max_dimension is provided, renames it, and positions it within the Blender scene.
+
+    Parameters:
+    - file_path (str): Path to the .obj or .blend file to import.
+    - new_name (str): The new name to assign to the imported object.
+    - position (tuple of floats): The desired location (x, y, z) for the object. Defaults to (0, 0, 5). No object can be placed higher than 5 m.
+    - max_dimension (float, optional): If provided, set the object's largest dimension (meter) to this size while maintaining aspect ratio.
+
+    Returns:
+    - new_object (Blender Object): The imported and resized object, or None if the import fails.
+
+    """
+    
+
+def create_camera(location = (-0.165, 15.066, 1.7549), rotation = (math.radians(-86.8), math.radians(180), math.radians(0)))
+    """
+    Adds a camera to the Blender scene at a specified location with a specified rotation.
+
+    Parameters:
+    - location (tuple of floats): The position (x, y, z) of the camera in the scene.
+    - rotation (tuple of floats): The rotation (x, y, z) of the camera in Euler angles.
+
+    Unless there is a special request:
+    - The camera location is adjusted to (-0.165, 15.066, 1.7549).
+    - The camera rotation is adjusted to (math.radians(-86.8), math.radians(180), math.radians(0))
+    - At this point, the center position of the camera lens is (-0.165, 13.665, 1.8521)
+    If the camera is required to be in a top-down view:
+    - The camera location is adjusted to (-0.07083, 9.59862 , 14.9201).
+    - The camera rotation is adjusted to (math.radians(-140), math.radians(180), math.radians(0))
+    - At this point, the center position of the camera lens is (-0.05282, 8.67276, 13.8952)
+
+    Returns:
+    - None, but creates a camera object in the scene with the specified location and rotation.
+    """
+    
+def create_cloth(name, size, location, rotation = [math.radians(90), 0 ,0], subdivision = 30, pinned_vertices_indices = None):
+    """
+    Creates a plane in Blender, sets it up as a cloth simulation object with given parameters, including rotation and subdivision.
+
+    Parameters:
+    - name (str): The name for the new cloth object.
+    - size (float): The size of the cloth object.
+    - location (tuple of floats): The location to place the center of the cloth object in the scene.
+    - rotation (list of floats): The rotation of the cloth object in radians, default is [0, 90 degrees on Y-axis, 0].
+    - subdivision (int): The number of subdivisions for the cloth mesh, default is 30 for detailed simulation.
+    - pinned_vertices_indices (list of ints or None): Indices of vertices to pin, if any.
+
+    Returns:
+    - plane (Blender Object): The created plane object with a cloth modifier.
+
+    This function is useful for quickly setting up cloth simulations with custom size, position, rotation, and detail level.
+    Vertices can be pinned to create fixed points in the simulation, which is common for simulating hanging fabrics or clothing.
+    """
+    
+
+def create_cube(name, size, location)
+    """
+    Creates a cube in Blender and places it at the specified location.
+
+    Parameters:
+    - name (str): The name for the new cube object.
+    - size (float): The size of the cube object. This is the length of the edges of the cube.
+    - location (tuple of floats): The location to place the center of the cube object in the scene.
+
+    Returns:
+    - cube (Blender Object): The created cube object.
+    """
+
+def create_tshirt()
+    """
+    Imports a T-shirt model from a given file path, setting up cloth physics for the shirt and passive rigid body physics for other objects.
+
+    Parameters:
+    - None
+
+    Returns:
+    - new_objects (set): A set of the newly imported objects.
+    """
+
+def create_flag(cloth_name):
+    """
+    Creates a flag with a cloth simulation and a flagpole to which the flag is attached.
+
+    Parameters:
+    - cloth_name (str): The name for the new cloth object (flag).
+
+    Returns:
+    - flagpole (Blender Object): The created flagpole object.
+
+    The function first creates a flag using the `create_cloth` function. After creation the flag is perpendicular to the camera view.
+    """
+
+def create_influid(viscosity_value = None):
+    """
+    Creates a fluid inflow sphere object and configures the fluid domain in the scene for a liquid simulation.
+
+    Parameters:
+    - viscosity_value (float, optional): The viscosity value to be set for the fluid domain. The viscosity value set for the fluid field. If the user prompt does not mention a viscosity value, it does not need to be set to use the default value; viscosity values range in size from 0.001 to 0.035.
+
+    Returns:
+    - tuple: A tuple containing the inflow object and the domain object, or (None, None) if the domain object is not found.
+
+    """
+
+## Physical Functions
+def add_collision(obj):
+    """
+    Adds a collision modifier to a Blender object if it does not already have one.
+
+    Parameters:
+    - obj (Blender Object): The object to which the collision modifier will be added.
+
+    Returns:
+    - None, but the object will have a collision modifier added to it if it wasn't present before.
+
+    This function is used in physics simulations where it's necessary for objects to interact with each other, 
+    such as rigid body or soft body simulations. The collision modifier makes the object a collider in the physics 
+    simulation, allowing other objects to bounce off or slide along its surface.
+    """
+    
+
+def add_rigid_body(obj, mass=1, elasticity=0.5, rigid_body_type='ACTIVE'):
+    """
+    Adds a rigid body physics characteristic to a Blender object.
+    
+    Args:
+    - obj (Blender Object): The object to which the rigid body physics will be applied.
+    - mass (float): The mass of the object, default is 1.
+    - elasticity (float): The restitution (bounciness) of the object, default is 0.5.
+    - rigid_body_type (str): The type of rigid body, can be 'ACTIVE' or 'PASSIVE', default is 'ACTIVE'.
+    
+    Returns:
+    - None, but the object is now a rigid body with the specified physics properties.
+    
+    This function is crucial for physics simulations, defining how the object behaves under physical forces.
+    """
+
+def add_initial_velocity_for_rigid_body(obj, initial_velocity, initial_rotation):
+    """
+    Add initial velocity and rotation for a rigid body object for physics simulation.
+    
+    Args:
+    - obj (Blender Object): The object to which the initial velocity and rotation will be applied.
+    - initial_velocity (tuple of floats): The starting velocity (x, y, z) of the object.
+    - initial_rotation (tuple of floats): The starting rotation (x, y, z) in degrees.
+    
+    Returns:
+    - None, but applies keyframes to the object to set its initial state for physics simulation.
+    """
+    
+
+def add_wind_force(direction = (0, math.radians(-90), 0), strength = 2500):
+    """
+    Creates a wind force field in Blender and sets its strength and direction.
+
+    Parameters:
+    - direction (tuple of floats): Euler angles (in radians) specifying the direction of the wind.
+    - strength (float): The strength of the wind force.
+
+    Returns:
+    - None, but a wind force field object is created and configured in the scene.
+
+    The default wind strength is 2500 unless otherwise specified. If a lower wind strength is required, set it to 500. If a strong wind is required, set it to 5000.
+    The default wind direction is (0, math.radians(-90), 0)
+    """
+
+def add_fluid_effector(obj):
+    """
+    Adds a fluid effector modifier to an object in Blender to influence the behavior of a fluid simulation.
+
+    Parameters:
+    - obj (Blender Object): The object to which the effector modifier will be added.
+
+    This function configures the object as an effector within the fluid simulation, meaning it will affect the fluid's motion and behavior. The effector's geometry is used as an obstacle or guide for the fluid simulation.
+    """
+
+## Other Functions
+def clear_scene():
+    """
+    Clears all objects from the current Blender scene.
+    
+    This function selects all objects in the scene and deletes them.
+    It is useful when starting a new scene setup or resetting the scene to a blank state.
+    
+    No inputs or outputs.
+    
+    Typically called at the beginning of a script when starting a new scene setup.
+    """
+
+def Render_a_video()
+    """
+    Sets up the render and compositor settings, bakes the necessary physics and fluid simulations,
+    and then renders an animation to a specified path.
+
+    The function is pre-configured with a path, start and end frames for the animation.
+    """
+
+------------------------Assets----------------------------------
+Here are some external 3D models, and you may need to import certain models according to the user prompt. When importing assets, use the predefined asset path ASSETS_PATH: 
+
+basketball.obj
+mug.obj
+boat.obj
+
+-----------------------Instruction-------------------------------
+In blender, we define the +Y direction as the frontal direction. The world in which the physical phenomenon takes place needs to be confined to a 5m x 5m x 5m cube in the +Z direction with the XY plane as the bottom surface.
+
+When you create objects using the functions above, please set the parameters according to the function's docstring to match the user prompt. When importing models from external sources, if the object is dynamic, specify the object's size and mass in the real world, then set both size and mass to 5 times their original values. If the physical phenomena primarily occur inside the object, set the object's size to occupy the entire world. You then need to place the objects in the correct positions according to the instruction, as well as control the physical properties of the objects using the physics functions by building setup_object functions. When a user prompt requires an object to appear at a defined position during motion, use physics-based knowledge to write the solution procedure for velocity and use the code to perform the calculations so that the object's motion conforms to the user prompt.
+
+Now, follow the prompt "A basketball free falls in the air, Basketball court" to write the corresponding Python script.

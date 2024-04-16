@@ -1,0 +1,30 @@
+system:
+  gpu_id: 0
+  seed: 2023
+
+prompt: "A basketball free falls in the air, Basketball court"
+
+movie:
+  fps: 24
+
+folders:
+  data: "../data/basketball/A basketball free falls in the air"
+  output:
+    base: "./basketball_results"
+    sub_folder: "A basketball free falls in the air"
+
+model:
+  unet:
+    is_local: False
+    path: "stabilityai/stable-diffusion-xl-base-1.0"
+  pipe: "stabilityai/stable-diffusion-xl-base-1.0"
+  controlnet:
+    depth: "diffusers/controlnet-depth-sdxl-1.0"
+    canny: "diffusers/controlnet-canny-sdxl-1.0"
+  vae: "madebyollin/sdxl-vae-fp16-fix"
+  alpha: 0.9
+
+scale:
+  depth_controlnet: 1.0
+  canny_controlnet: 1.0
+  guidance: 8.5
