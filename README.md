@@ -1,4 +1,4 @@
-# GPT4Motion: Scripting Physical Motions in Text-to-Video Generation via Blender-Oriented GPT Planning
+# :basketball: GPT4Motion: Scripting Physical Motions in Text-to-Video Generation via Blender-Oriented GPT Planning
 
 https://github.com/jiaxilv/GPT4Motion/assets/67190845/f4309a24-fb8d-4800-8709-5794adf338e3
 
@@ -11,13 +11,15 @@ https://github.com/jiaxilv/GPT4Motion/assets/67190845/f4309a24-fb8d-4800-8709-57
 [**Paper**](https://arxiv.org/abs/2311.12631) | [**Project Website**](https://gpt4motion.github.io/) 
 
 
-Jiaxi Lv\*, Yi Huang\*, Mingfu Yan\*, Jiancheng Huang, Jianzhuang Liu Yifan Liu, Yafei Wen, Xiaoxin Chen, Shifeng Chen
+Jiaxi Lv\*, Yi Huang\*, Mingfu Yan\*, Jiancheng Huang, Jianzhuang Liu, Yifan Liu, Yafei Wen, Xiaoxin Chen, Shifeng Chen
 
 Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences,  University of Chinese Academy of Sciences, VIVO AI Lab
 
 
 
 ## News!!!
+
+* 2024-06-18  :fire::fire::fire: Congratulations! **GPT4Motion received the Best Paper Runner-Up Award at the CVPR 2024 PBDL workshop.**
 
 * 2024-04-16  We released the code for GPT4Motion. 
 
