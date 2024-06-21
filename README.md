@@ -17,9 +17,9 @@ Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences,  Univers
 
 
 
-## News!!!
+## News!!! :fire::fire::fire:
 
-* 2024-06-18  :fire::fire::fire: Congratulations! **GPT4Motion received the Best Paper Runner-Up Award at the CVPR 2024 PBDL workshop.**
+* 2024-06-18   :trophy::trophy::trophy: Congratulations! **GPT4Motion was received the Best Paper Runner-Up Award at the CVPR 2024 PBDL workshop.**
 
 * 2024-04-16  We released the code for GPT4Motion. 
 
